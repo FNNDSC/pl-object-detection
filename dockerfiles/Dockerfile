@@ -45,6 +45,7 @@ RUN cd /workspace/TensorRT-OSS/build/out &&\
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y libsm6 libxext6 libxrender-dev python3-tk
 RUN pip install opencv-python
+RUN pip install tensorflow-gpu==1.14
 
 # Install miscellaneous Python packages
 RUN /opt/tensorrt/python/python_setup.sh

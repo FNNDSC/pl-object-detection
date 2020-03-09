@@ -159,18 +159,35 @@ def main():
     print("TRT ENGINE PATH", args.trt_engine_path)
 
     if args.camera == True:
-        print('Running webcam:', args.camera)
+    #if True:
+        #print('Running webcam:', args.camera)
         # Define the video stream
-        cap = cv2.VideoCapture(0)  # Change only if you have more than one webcams
+        #cap = cv2.VideoCapture(0)
+        #cap = cv2.VideoCapture('animal.webm')  # Change only if you have more than one webcams
+        cap = cv2.VideoCapture('animal360p.webm')  # Change only if you have more than one webcams
+        if (cap.isOpened()== False): 
+            print("Error opening video stream or file")
+            exit()
+        else:
+            print("success!")
+        # Default resolutions of the frame are obtained.The default resolutions are system dependent.
+	    # We convert the resolutions from float to integer.
+        frame_width = int(cap.get(3))
+        frame_height = int(cap.get(4))
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        
+	    # Define the codec and create VideoWriter object.The output is stored in 'outpy.avi' file.
+        out = cv2.VideoWriter('animal360pOutput.mp4',cv2.VideoWriter_fourcc(*'XVID'), fps, (frame_width,frame_height))
 
         # Loop for running inference on frames from the webcam
         while True:
             # Read frame from camera (and expand its dimensions to fit)
             ret, image_np = cap.read()
-
+            if not ret:
+                print("Video played.")
+                break
             # Actually run inference
             detection_out, keep_count_out = trt_inference_wrapper.infer_webcam(image_np)
-
             # Overlay the bounding boxes on the image
             # let analyze_prediction() draw them based on model output
             img_pil = Image.fromarray(image_np)
@@ -179,10 +196,13 @@ def main():
                 analyze_prediction(detection_out, det * prediction_fields, img_pil)
             final_img = np.asarray(img_pil)
 
+            out.write(final_img)
             # Display output
-            cv2.imshow('object detection', final_img)
+            ## cv2.imshow('object detection', final_img)
 
             if cv2.waitKey(25) & 0xFF == ord('q'):
+                cap.release()
+                out.release()
                 cv2.destroyAllWindows()
                 break
 
