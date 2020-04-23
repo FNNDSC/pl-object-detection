@@ -98,8 +98,8 @@ Now, prefix all calls with
 .. code:: bash
 
     docker run --security-opt label=type:nvidia_container_t
-                -v $(pwd)/in:/incoming:z -v $(pwd)/out:/outgoing:z
-                docker.io/fnndsc/pl-objectdetection_moc_ppc64
+                -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing
+                docker.io/fnndsc/pl-objectdetection_x86
                 objectdetection.py -f filename.webm
                 /incoming /outgoing
 
@@ -109,8 +109,8 @@ Thus, getting inline help is:
 
     mkdir in out && chmod 777 out
     docker run --security-opt label=type:nvidia_container_t
-                -v $(pwd)/in:/incoming:z -v $(pwd)/out:/outgoing:z
-                docker.io/fnndsc/pl-objectdetection_moc_ppc64
+                -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing
+                docker.io/fnndsc/pl-objectdetection_x86
                 objectdetection.py -f filename.webm
                 /incoming /outgoing
 
