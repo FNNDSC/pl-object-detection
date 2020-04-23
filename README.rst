@@ -48,17 +48,17 @@ Synopsis
 
 .. code::
 
-python objectdetection.py                                         \\
-    [-h] [--help]                                               \\
-    [--json]                                                    \\
-    [--man]                                                     \\
-    [--meta]                                                    \\
-    [--savejson <DIR>]                                          \\
-    [-v <level>] [--verbosity <level>]                          \\
-    [--version]                                                 \\
-    [--file <filename>]                                         \\
-    <inputDir>                                                  \\
-    <outputDir>
+    python objectdetection.py                                         \\
+            [-h] [--help]                                               \\
+            [--json]                                                    \\
+            [--man]                                                     \\
+            [--meta]                                                    \\
+            [--savejson <DIR>]                                          \\
+            [-v <level>] [--verbosity <level>]                          \\
+            [--version]                                                 \\
+            [--file <filename>]                                         \\
+            <inputDir>                                                  \\
+            <outputDir>
 
 Description
 -----------
@@ -111,7 +111,7 @@ Thus, getting inline help is:
     docker run --security-opt label=type:nvidia_container_t
                 -v $(pwd)/in:/incoming:z -v $(pwd)/out:/outgoing:z
                 docker.io/fnndsc/pl-objectdetection_moc_ppc64
-                objectdetection.py
+                objectdetection.py -f filename.webm
                 /incoming /outgoing
 
 
