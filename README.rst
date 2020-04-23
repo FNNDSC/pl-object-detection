@@ -100,7 +100,7 @@ Now, prefix all calls with
     docker run --security-opt label=type:nvidia_container_t
                 -v $(pwd)/in:/incoming:z -v $(pwd)/out:/outgoing:z
                 docker.io/fnndsc/pl-objectdetection_moc_ppc64
-                objectdetection.py
+                objectdetection.py -f filename.webm
                 /incoming /outgoing
 
 Thus, getting inline help is:
