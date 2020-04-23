@@ -1,7 +1,5 @@
 ### ----- INSTALL TENSORRT ----- ###
 FROM nvcr.io/nvidia/tensorrt:19.05-py3
-ENV APPROOT="/usr/src/objdect"
-WORKDIR $APPROOT
 
 ### ----- INSTALL TENSORRT OPEN SOURCE SOFTWARE ----- ###
 # Install required libraries
@@ -56,6 +54,9 @@ RUN /opt/tensorrt/python/python_setup.sh
 ENV QT_X11_NO_MITSHM=1
 
 # Return to project directory and open a terminal
+
+ENV APPROOT="/usr/src/objdect"
 COPY ["SSD_Model", "${APPROOT}/SSD_Model"]
 COPY ["VOCdevkit", "${APPROOT}/VOCdevkit"]
+WORKDIR $APPROOT/SSD_Model
 ENTRYPOINT ["python3"]
