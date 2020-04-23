@@ -1,7 +1,5 @@
 ### ----- INSTALL TENSORRT ----- ###
 FROM nvcr.io/nvidia/tensorrt:19.05-py3
-ENV APPROOT="/usr/src/objdect"
-WORKDIR $APPROOT
 
 ### ----- INSTALL TENSORRT OPEN SOURCE SOFTWARE ----- ###
 # Install required libraries
@@ -47,7 +45,7 @@ RUN cd /workspace/TensorRT-OSS/build/out &&\
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y libsm6 libxext6 libxrender-dev python3-tk
 RUN pip install opencv-python chrisapp
-RUN pip install tensorflow-gpu==1.14
+RUN pip install tensorflow-gpu==1.14 tensorflow==1.14
 
 # Install miscellaneous Python packages
 RUN /opt/tensorrt/python/python_setup.sh
@@ -56,6 +54,9 @@ RUN /opt/tensorrt/python/python_setup.sh
 ENV QT_X11_NO_MITSHM=1
 
 # Return to project directory and open a terminal
-COPY ["SSD_Model", "${APPROOT}/SSD_Model"]
+
+ENV APPROOT="/usr/src/objdect"
+WORKDIR $APPROOT/SSD_Model
 COPY ["VOCdevkit", "${APPROOT}/VOCdevkit"]
+COPY ["SSD_Model", "${APPROOT}/SSD_Model"]
 ENTRYPOINT ["python3"]
