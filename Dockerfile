@@ -57,7 +57,7 @@ ENV QT_X11_NO_MITSHM=1
 
 ENV APPROOT="/usr/src/objdect"
 WORKDIR $APPROOT/SSD_Model
-COPY ["VOCdevkit", "${APPROOT}/VOCdevkit"]
-#COPY ["SSD_Model", "${APPROOT}/SSD_Model"]
+#COPY ["VOCdevkit", "${APPROOT}/VOCdevkit"]
+COPY ["SSD_Model", "${APPROOT}/SSD_Model"]
 
 ENTRYPOINT ["python3"]
